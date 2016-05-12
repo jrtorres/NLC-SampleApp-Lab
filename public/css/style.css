@@ -16,7 +16,10 @@
 .confidence {
 	color: #d74108;
 }
-
+.fullResponse {
+  color:blue;
+  white-space: pre-wrap;
+}
 .classification {
 	color: #d74108;
 }

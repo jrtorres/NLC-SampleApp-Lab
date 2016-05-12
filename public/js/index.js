@@ -25,7 +25,8 @@ $(document).ready(function() {
     $results = $('.results'),
     $classification = $('.classification'),
     $confidence = $('.confidence'),
-    $question = $('.questionText');
+    $question = $('.questionText'),
+    $fullResponse = $('.fullResponse');
 
 
   $('.ask-btn').click(function() {
@@ -55,6 +56,13 @@ $(document).ready(function() {
         $results.show();
         $classification.text(answers.top_class);
         $confidence.text(Math.floor(answers.classes[0].confidence * 100) + '%');
+
+        var s = '\n';
+        answers.classes.forEach(function(item){
+          s = s + '\t[ ' + item.class_name + '\t-\t' + item.confidence + ' ]\n ';
+        });
+        $fullResponse.text(s);
+
         $('html, body').animate({ scrollTop: $(document).height() }, 'fast');
         $loading.hide();
       })
@@ -67,11 +75,10 @@ $(document).ready(function() {
   };
 
   [
-    'Is it hot outside?',
-    'What is the expected high for today?',
-    'Will it be foggy tomorrow morning?',
-    'Should I prepare for sleet?',
-    'Will there be a storm today?'
+    'What are the symptoms of Diabetes ?',
+    'causes for headaches ?',
+    'What is acute pancreatitis?',
+    'treament for nosebleed?',
   ].forEach(function(question){
     $('<a>').text(question)
       .mousedown(function() {
